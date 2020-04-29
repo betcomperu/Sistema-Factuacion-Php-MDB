@@ -11,7 +11,7 @@
     
     <form action="" method="post">
     
-    <h3>Iniciar Sesión</h3>
+    <h3>INICIAR SESIÓN</h3>
     <img src="img/Login.png" alt="Login">
 
     <input type="text" name="usuario" placeholder="Usuario">
