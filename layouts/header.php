@@ -1,6 +1,10 @@
 <?php 
 session_start();
-if ($_SESSION['active']==0) {
+/*if ($_SESSION['active']==0) {
+  header('location: ../index.php');
+}*/
+
+if (!isset($_SESSION['active'])){
   header('location: ../index.php');
 }
 
@@ -74,7 +78,7 @@ if ($_SESSION['active']==0) {
                   <li class="user-footer">
                     
                     <div class="pull-right">
-                      <a href="<?php unset($_SESSION['active']); ?>" class="btn btn-default btn-flat">Cerrar</a>
+                      <a href="../logout.php" class="btn btn-default btn-flat">Cerrar</a>
                     </div>
                   </li>
                 </ul>

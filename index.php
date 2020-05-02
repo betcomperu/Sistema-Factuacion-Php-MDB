@@ -19,7 +19,7 @@ if(!empty($_POST)) // Si NO esta vacio!
             $_SESSION['correo']=$data['correo'];
             $_SESSION['user']=$data['usuario'];
             $_SESSION['rol']=$data['rol'];
-            header('location: core/registro_usuario.php'); // redirigimos donde querramos en este caso a la carpeta "core"
+            header('location: core/'); // redirigimos donde querramos en este caso a la carpeta "core"
         }else{ // Si no ha cumplido nada de esto entonces le damos un mensaje 
           $alert ="El usuario o la clave son incorrectas"; // Esta alerta se mostrará donde se pinta la variable.
         }
