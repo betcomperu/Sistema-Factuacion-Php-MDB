@@ -5,7 +5,8 @@
     $password="mysql";
     $db="facturacion";
 
-    $cn = mysqli_connect($host, $user, $password, $db);
+    $cn = new mysqli($host, $user, $password, $db);
+    mysqli_query($cn,"SET NAMES 'utf8'");
 
     if(!$cn){
         echo "Error en la conexión";
