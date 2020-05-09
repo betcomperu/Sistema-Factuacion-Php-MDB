@@ -1,103 +1,134 @@
-
 <?php
 
-include '../layouts/header.php';
-include '../layouts/aside.php';
-include '../config/conexion.php';
-
+include "../layouts/header.php";
+include "../layouts/top-menu.php";
+include "../layouts/aside.php";
 
 ?>
-<!--Contenido-->
-     <!-- Content Wrapper. Contains page content -->
-     <div class="content-wrapper">
-       
-       <!-- Main content -->
-       <section class="content">
-           <div class="row">
-             <div class="col-md-12">
-                 <div class="box">
-                   <div class="box-header with-border">
-                         <h1 class="box-title">USUARIOS  <button class="btn btn-success" onclick="mostrarform(true)"><i class="fa fa-plus-circle"></i> Agregar</button></h1>
-                       <div class="box-tools pull-right">
-                       </div>
-                   </div>
-                   <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">Listado de Usuarios Registrados</h3>
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Listado de Usuarios</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Listado de Usuarios</li>
+                    </ol>
+                </div>
             </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table id="listausuario" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Nombre y Apellidos</th>
-                  <th>Email</th>
-                  <th>Usuario</th>
-                  <th>Rol</th>
-                  <th>Opciones</th>
-                </tr>
-                </thead>
-                <?php
-                $query=mysqli_query($cn,"SELECT usuario.nombre, usuario.correo, usuario.usuario, rol.rol FROM rol INNER JOIN usuario ON rol.idrol = usuario.rol" );
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Tabla de usuarios</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
+                        <i class="fas fa-minus"></i></button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip"
+                        title="Remove">
+                        <i class="fas fa-times"></i></button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Usuarios <button class="btn btn-success" onclick="mostrarform(true)"><i
+                                class="fa fa-plus-circle"></i> Agregar</button></h3>
+                    <div class="box-tools pull-right">
+                    </div>
+                </div>
+                <div class="box">
+                    <table id="tabla1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nombre completo</th>
+                                <th>Correo</th>
+                                <th>Usuario</th>
+                                <th>Rol</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </thead>
+                        <?php
+                include "../config/conexion.php";
+                $query=mysqli_query($cn,"SELECT usuario.idusuario,usuario.nombre, usuario.correo, usuario.usuario, rol.rol FROM rol INNER JOIN usuario ON rol.idrol = usuario.rol" );
                 $result= mysqli_num_rows($query);?>
-                <?php if ($result>0):?>
+                        <?php if ($result>0):?>
 
-                 <?php  while($data = mysqli_fetch_array($query)):?>
-  
-                <tbody>
-            
-                  <td><?php echo $data['nombre'];?></td>
-                  <td><?php echo $data['correo'];?></td>
-                  <td><?php echo $data['usuario']; ?></td>
-                  <td>
-                  <?php 
-                  $valrol=$data['rol'];
-                  switch ($valrol) {
-                      case 'Administrador':
-                      //  echo '<p class="text-green">'.$valrol.'</p>';
-                        echo '<small class="label bg-red">'.$valrol.'</small>';
-                          break;
-                      case 'Supervisor':
-                        echo '<small class="label bg-green">'.$valrol.'</small>';
-                              break;
-                      default:
-                        echo '<small class="label bg-black">'.$valrol.'</small>';
-                          break;
-                                    }
-                  ?>
-                            
-                  </td>
-                  <td>
-                  <button type="button" class="btn btn-info">Editar</button>
-                  <button type="button" class="btn btn-danger">Eliminar</button>
+                        <?php  while($data = mysqli_fetch_array($query)):?>
 
-                  </td>
-              
-        
-                </tfoot>
-                 <?php endwhile; ?>
-                <?php endif; ?>
-              </table>
+
+                        <tr>
+                            <td><?php echo $data['nombre'];?></td>
+                            <td><?php echo $data['correo'];?></td>
+                            <td><?php echo $data['usuario']; ?></td>
+                            <td>
+                                <?php 
+                        $valrol=$data['rol'];
+                        switch ($valrol) {
+                            case 'Administrador':
+                            //  echo '<p class="text-green">'.$valrol.'</p>';
+                              echo '<small class="label bg-red">'.$valrol.'</small>';
+                                break;
+                            case 'Supervisor':
+                              echo '<small class="label bg-green">'.$valrol.'</small>';
+                                    break;
+                            default:
+                              echo '<small class="label bg-black">'.$valrol.'</small>';
+                                break;
+                                          }
+                        ?>
+
+                            </td>
+                            <td>
+                                
+                                
+                            <a class="btn btn-primary" href="editar_usuario.php?id=<?php echo $data['idusuario'];?>" role="button">Editar</a>
+                                
+                            <a class="btn btn-danger" href="#" role="button">Eliminar</a>
+                            </td>
+
+                        </tr>
+
+
+                        <?php endwhile; ?>
+                        <?php endif; ?>
+                        <tfoot>
+                            <tr>
+                                <th>Nombre Completo</th>
+                                <th>Correo</th>
+                                <th>Usuario</th>
+                                <th>Rol</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    Footer
+                </div>
+                <!-- /.card-footer-->
             </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-                   <!-- centro -->
-                   <div class="panel-body table-responsive" style="height: 400px;" id="listadoregistros">
-                       
-                   </div>
-                   <!--Fin centro -->
-                 </div><!-- /.box -->
-             </div><!-- /.col -->
-         </div><!-- /.row -->
-     </section><!-- /.content -->
+            <!-- /.card -->
 
-   </div><!-- /.content-wrapper -->
- <!--Fin-Contenido-->
+    </section>
+    <!-- /.content -->
+</div>
+
+
+
+
 <?php
 include '../layouts/footer.php';
 
