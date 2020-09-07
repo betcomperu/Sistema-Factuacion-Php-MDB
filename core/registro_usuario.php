@@ -114,12 +114,12 @@ include "../layouts/aside.php"
        <div class="col-xs-8">
          <div class="checkbox icheck">
            <label>
-             <input type="checkbox"> Aceptar términos <a href="#">términos</a>
+             <input type="checkbox"><a href="#">Aceptar términos</a>
            </label>
          </div>
-       </div>
+       </div><br>
        <!-- /.col -->
-       <div class="col-xs-4">
+       <div class="col-xs-3">
          <button type="submit" class="btn btn-primary btn-block btn-flat">Registar</button>
        </div>
        <!-- /.col -->
@@ -128,7 +128,7 @@ include "../layouts/aside.php"
 
   
 
-   <a href="login.html" class="text-center">I already have a membership</a>
+   <a href="index.php" class="text-center">Ya tengo una cuenta</a>
  </div>
         </div>
         <!-- /.card-body -->
