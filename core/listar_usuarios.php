@@ -43,9 +43,12 @@ include "../layouts/aside.php";
             </div>
             <div class="card-body">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Usuarios <button class="btn btn-success" onclick="mostrarform(true)"><i
-                                class="fa fa-plus-circle"></i> Agregar</button></h3>
+                    <a href="registro_usuario.php"
+                                class="btn btn-primary"><i
+                                class="fa fa-plus-circle"></i> Agregar usuario
+                    </a>
                     <div class="box-tools pull-right">
+                    <br>
                     </div>
                 </div>
                 <div class="box">
@@ -61,7 +64,9 @@ include "../layouts/aside.php";
                         </thead>
                         <?php
                 include "../config/conexion.php";
-                $query=mysqli_query($cn,"SELECT usuario.idusuario,usuario.nombre, usuario.correo, usuario.usuario, rol.rol FROM rol INNER JOIN usuario ON rol.idrol = usuario.rol" );
+                $query=mysqli_query($cn,"SELECT usuario.idusuario,usuario.nombre, usuario.correo, usuario.usuario, rol.rol 
+                                        FROM rol INNER JOIN usuario 
+                                        ON rol.idrol = usuario.rol" );
                 $result= mysqli_num_rows($query);?>
                         <?php if ($result>0):?>
 
