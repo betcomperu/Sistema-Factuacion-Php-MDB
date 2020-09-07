@@ -48,7 +48,7 @@ include "../layouts/aside.php";
                                 class="fa fa-plus-circle"></i> Agregar usuario
                     </a>
                     <div class="box-tools pull-right">
-                    <br>
+                       <br>
                     </div>
                 </div>
                 <div class="box">
