@@ -26,6 +26,7 @@ if (empty($_REQUEST['id']))  //Si no hay id puesto entonces...
         }
     }else {
         header ("location: lista_usuarios.php");
+        
     }
 }
 
