@@ -67,6 +67,7 @@ $rs_sql= mysqli_num_rows($sql); // Muestra la cantidad de registros que cumplen 
 if($rs_sql==0){
     header('location: listar_usuarios.php');
 }else{ // jalamos los datos del resultado del a consulta:
+  $idrol="";
   while ($data=mysqli_fetch_array($sql)) {
     $iduser=$data['idusuario'];
     $nombre=$data['nombre'];
@@ -74,6 +75,13 @@ if($rs_sql==0){
     $usuario=$data['usuario'];
     $idrol=$data['idrol'];
     $rol=$data['rol'];
+    if ($idrol==1) {
+      $option = "<option value=".'$idrol'."select>".$rol."</rol>";
+    }elseif ($idrol==2) {
+      $option = "<option value=".'$idrol'."select>".$rol."</rol>";
+    }elseif ($idrol==3) {
+      $option = "<option value=".'$idrol'."select>".$rol."</rol>";
+    }
   }
 }
 
@@ -148,17 +156,17 @@ include "../layouts/aside.php"
              $query_rol = mysqli_query($cn, "SELECT * FROM rol");
              $result_rol = mysqli_num_rows($query_rol);
            ?>
-           <select name="rol" id="rol" class="form-control select2" style="width: 100%;">
-                 <?php 
-                 if ($result_rol>0) {
-                 
-                 while($rol=mysqli_fetch_array($query_rol)):?>
-                 
-                   <!-- HTML codigo -->   
-                   <option value="<?php echo $rol['idrol']; ?>"><?php echo $rol['rol'] ;?></option>                 
-                   <!-- HTML codigo --> 
-                 <?php endwhile; }?>
-           </select>
+                  <select name="rol" id="rol" class="form-control select2" style="width: 100%;">
+                        <?php 
+                        echo "<b>".$option."</b>";
+                        if ($result_rol>0) {
+                        
+                        while($rol=mysqli_fetch_array($query_rol)):?>
+                          <!-- HTML codigo -->   
+                          <option value="<?php echo $rol['idrol']; ?>"><?php echo $rol['rol'] ;?></option>                 
+                          <!-- HTML codigo --> 
+                        <?php endwhile; }?>
+                  </select>
      </div>
      <div class="row">
     

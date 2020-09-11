@@ -100,7 +100,7 @@ include "../layouts/aside.php";
                                 
                             <a class="btn btn-primary" href="editar_usuario.php?id=<?php echo $data['idusuario'];?>" role="button">Editar</a>
                                 
-                            <a class="btn btn-danger" href="#" role="button">Eliminar</a>
+                            <a class="btn btn-danger" href="eliminar_usuario.php?id=<?php echo $data['idusuario'];?>" role="button">Eliminar</a>
                             </td>
 
                         </tr>
