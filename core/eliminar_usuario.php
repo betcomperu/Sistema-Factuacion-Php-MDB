@@ -1,22 +1,31 @@
 <?php
-  include "../layouts/header.php";
+
+if (headers_sent()) {
+  // las cabeceras ya se han enviado, no intentar añadir una nueva
+}
+else {
+  // es posible añadir nuevas cabeceras HTTP
+}
+
+include "../layouts/header.php";
 include "../layouts/top-menu.php";
 include "../layouts/aside.php";
+include('../config/conexion.php');
 
-if (empty($_REQUEST['id']))  //Si no hay id puesto entonces...
+if (empty($_GET['id']))  //Si no hay id puesto entonces...
  {
-    header ("location: lista_usuarios.php");
+  header('location: index.php');
 }else{
-    include('../config/conexion.php');
+    
     $idusuario=$_REQUEST['id'];
-    $query = mysqli_query($cn, "SELECT u.nombre, u.usuario, u.rol
+    $query = mysqli_query($cn, "SELECT u.nombre, u.usuario, r.rol
                                 FROM usuario u
                                 INNER JOIN
                                 rol r
                                 ON u.rol = r.idrol
                                 WHERE u.idusuario = $idusuario");
     $result = mysqli_num_rows($query);
-  //  var_dump ($result);
+ // var_dump ($result);
 
     if($result >0){
         while($data = mysqli_fetch_array($query)){
@@ -24,8 +33,8 @@ if (empty($_REQUEST['id']))  //Si no hay id puesto entonces...
             $usuario = $data['usuario'];
             $rol = $data['rol'];
         }
-    }else {
-        header ("location: lista_usuarios.php");
+    }else{
+      header('location: listar_usuarios.php');
         
     }
 }
@@ -37,17 +46,20 @@ if (empty($_REQUEST['id']))  //Si no hay id puesto entonces...
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Eliminar</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v1</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
+          <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Eliminar</h1>
+              </div><!-- /.col -->
+                <div class="col-sm-6">
+                  <ol class="breadcrumb float-sm-right">
+                      <li class="breadcrumb-item"><a href="#">Home</a></li>
+                      <li class="breadcrumb-item active">Dashboard v1</li>
+                  </ol>
+                </div>
+                <div class="data_delete">
+               
+                </div><!-- /.col -->
+          </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->

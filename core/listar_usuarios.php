@@ -6,6 +6,12 @@ include "../layouts/aside.php";
 
 ?>
 
+
+
+
+ 
+
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -66,7 +72,7 @@ include "../layouts/aside.php";
                 include "../config/conexion.php";
                 $query=mysqli_query($cn,"SELECT usuario.idusuario,usuario.nombre, usuario.correo, usuario.usuario, rol.rol 
                                         FROM rol INNER JOIN usuario 
-                                        ON rol.idrol = usuario.rol" );
+                                        ON rol.idrol = usuario.rol  WHERE condicion=1" );
                 $result= mysqli_num_rows($query);?>
                         <?php if ($result>0):?>
 
@@ -96,11 +102,35 @@ include "../layouts/aside.php";
 
                             </td>
                             <td>
-                                
+                    <!-- Modal contenido -->
+                            <div class="container">
+                                <div class="modal fade" tabindex="-1" id="modalborrar">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h4 class="modal-title">Eliminar Usuario</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span></button>
+                                        </div>
+                                        <div class="modal-body">
+                                        <p>¿Desea aliminar el usuario?&hellip;</p>
+                                        </div>
+                                        <div class="modal-footer justify-content-between">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                                    
+                                        <a href="eliminar_usuario.php" class="btn btn-danger" role="button">Si Borrar</a>
+                                        </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    <!-- Modal contenido -->
                                 
                             <a class="btn btn-primary" href="editar_usuario.php?id=<?php echo $data['idusuario'];?>" role="button">Editar</a>
                                 
-                            <a class="btn btn-danger" href="eliminar_usuario.php?id=<?php echo $data['idusuario'];?>" role="button">Eliminar</a>
+                            
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalborrar">Eliminar</button>
                             </td>
 
                         </tr>
@@ -119,6 +149,9 @@ include "../layouts/aside.php";
                         </tfoot>
                     </table>
                 </div>
+        
+
+
                 <!-- /.card-body -->
                 <div class="card-footer">
                     Footer
